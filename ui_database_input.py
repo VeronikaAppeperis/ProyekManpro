@@ -1,13 +1,10 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QLabel, QLineEdit, QVBoxLayout, QSpinBox
-from PyQt5.uic import loadUi
-
-app = QApplication(sys.argv)
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QLabel, QLineEdit, QVBoxLayout
+from PyQt5.QtCore import Qt
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        # loadUi('mainwindow.ui', self)
         self.setWindowTitle('Startup Success or Fail')
 
         self.table = QTableWidget(self)
@@ -63,7 +60,28 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(widget)
 
+        # Membuat button Enter
+        button = QPushButton('Enter', self)
+        button.clicked.connect(self.on_enter_clicked)
+
+        layout.addWidget(button)
+
         self.show()
 
+    def on_enter_clicked(self):
+        row_count = self.table.rowCount()
+        self.table.insertRow(row_count)
+        for column in range(self.table.columnCount()):
+            item = QTableWidgetItem()
+            item.setTextAlignment(Qt.AlignCenter)
+            item.setText(self.layout().itemAt(column * 2 + 1).widget().text())
+            self.table.setItem(row_count, column, item)
+
+        # Menghapus teks input setelah tombol Enter ditekan
+        for i in range(self.layout().count()):
+            if isinstance(self.layout().itemAt(i).widget(), QLineEdit):
+                self.layout().itemAt(i).widget().clear()
+
+app = QApplication(sys.argv)
 window = MainWindow()
 sys.exit(app.exec_())
