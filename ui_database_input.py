@@ -75,11 +75,11 @@ class MainWindow(QMainWindow):
         cursor = conn.cursor()
 
         # buat tabel jika belum ada
-        cursor.execute('''CREATE TABLE IF NOT EXISTS startUp
-                          (name TEXT, category TEXT, funding INT, country TEXT, state TEXT, region TEXT, city TEXT)''')
+        cursor.execute('''CREATE TABLE IF NOT EXISTS startup
+                        (name TEXT, category TEXT, funding INT, country TEXT, state TEXT, region TEXT, city TEXT)''')
 
         # masukkan data ke dalam tabel
-        cursor.execute("INSERT INTO startUp VALUES (?, ?, ?, ?, ?, ?, ?)", (name, category, int(funding), country, state, region, city))
+        cursor.execute("INSERT INTO startup VALUES (?, ?, ?, ?, ?, ?, ?)", (name, category, int(funding), country, state, region, city))
         conn.commit()
 
         # tampilkan data di tabel
@@ -96,6 +96,7 @@ class MainWindow(QMainWindow):
         # Menutup koneksi ke database
         cursor.close()
         conn.close()
+
 
 if __name__ == '__main__':
     window = MainWindow()
