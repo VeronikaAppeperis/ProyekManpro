@@ -1,4 +1,5 @@
 import sys
+from PyQt5 import QtChart 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
 from PyQt5.QtChart import QChart, QChartView, QAreaSeries, QPieSeries, QLineSeries, QBarSeries, QBarSet, QBarCategoryAxis
 
