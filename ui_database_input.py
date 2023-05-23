@@ -71,7 +71,7 @@ class MainWindow(QMainWindow):
 
     def submitData(self, name, category, funding, country, state, region, city):
         # buat koneksi ke database
-        conn = sqlite3.connect('startup.sql')
+        conn = sqlite3.connect('startup.db')
         cursor = conn.cursor()
 
         # buat tabel jika belum ada
